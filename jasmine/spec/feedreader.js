@@ -60,7 +60,7 @@ $(function () {
         it('menu is hidden', function () {
             for (item of allFeeds) {
                 var body = $("body");
-                expect(checkMenuElem(body[0].className)).toBe(true);
+                expect(checkMenuElem()).toBe(true);
             }
         });
 
@@ -70,10 +70,10 @@ $(function () {
          * clicked and does it hide when clicked again.
          */
         it('when menu is clicked changes state', function () {
-            for (item of allFeeds) {
-                expect(clickedMenu()).toBe(true);
-                expect(checkMenu()).not.toBe(true);
-            }
+            clickMenu()
+            expect(clickedMenu()).toBe(0);
+            clickMenu()
+            expect(clickedMenu()).not.toBe(0);
         });
     });
     
@@ -93,9 +93,8 @@ $(function () {
 
     })
 
-    it('one element at least in container', function (done) {
+    it('one element at least in container', function () {
         expect(checkEntries()).toBe(true);
-        done();
     });
 });
 
@@ -103,16 +102,19 @@ $(function () {
 describe('New Feed Selection', function () {
     beforeEach(function (done) {
         loadFeed(0, function () {
-            done();
+            setLastContent();
+            loadFeed(1, function () {
+                done();
+            })
         })
     })
     /* TODO: Write a test that ensures when a new feed is loaded
      * by the loadFeed function that the content actually changes.
      * Remember, loadFeed() is asynchronous.
      */
-    it('content loaded', function (done) {
-            expect(checkURLs()).toBe(true);
-            done();
+    it('content loaded', function (done) { 
+        expect(checkURLs()).toBe(false);
+        done();
     });
 });    
 }());

@@ -7,7 +7,6 @@
  */
 
 // The names and URLs to all of the feeds we'd like available.
-var clickedMenu;
 
 var allFeeds = [{
     name: 'Udacity Blog',
@@ -22,6 +21,8 @@ var allFeeds = [{
     name: 'Linear Digressions',
     url: 'http://feeds.feedburner.com/udacity-linear-digressions'
 }];
+
+var lastContent = "";
 
 /* This function starts up our application. The Google Feed
  * Reader API is loaded asynchonously and will then call this
@@ -53,6 +54,7 @@ function loadFeed(id, cb) {
         contentType: "application/json",
         success: function (result, status) {
 
+            
             var container = $('.feed'),
                 title = $('.header-title'),
                 entries = result.feed.entries,
@@ -96,7 +98,7 @@ function checkMenu() {
 
 
 function checkEntries() {
-    if ($('.entry').length > 0) {
+    if ($('.feed .entry').length > 0) {
         return true;
     } else {
         return false;
@@ -104,8 +106,13 @@ function checkEntries() {
 
 }
 
+function setLastContent() {
+    lastContent = $('.feed').html()
+};
+
 function checkURLs() {
-    if ($('.entry-link').length > 0) {
+    var teste = $('.feed').html();
+    if (teste == lastContent) {
         return true;
     } else {
         return false;
@@ -114,20 +121,18 @@ function checkURLs() {
 
 
 // Verifica se o menu foi clicado
-function clickedMenu() {
-    return true;
+function clickMenu(){
+    document.querySelector('.menu-icon-link').click();
 }
 
-$('.menu-icon-link').click(function (e) {
-    clickedMenu();
-})
+function clickedMenu() {
+    var teste = document.getElementsByClassName('menu-hidden').length;
+    return teste;
+}
 
-function checkMenuElem(classFound) {
-    if (classFound == 'menu-hidden') {
-        return true;
-    } else {
-        return false;
-    }
+function checkMenuElem() {
+    var teste = $('body').hasClass('menu-hidden');
+    return teste;
 }
 
 
