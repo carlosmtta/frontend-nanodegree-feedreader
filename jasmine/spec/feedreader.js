@@ -58,10 +58,7 @@ $(function () {
          * hiding/showing of the menu element.
          */
         it('menu is hidden', function () {
-            for (item of allFeeds) {
-                var body = $("body");
                 expect(checkMenuElem()).toBe(true);
-            }
         });
 
         /* TODO: Write a test that ensures the menu changes
@@ -71,9 +68,9 @@ $(function () {
          */
         it('when menu is clicked changes state', function () {
             clickMenu()
-            expect(clickedMenu()).toBe(0);
+            expect(checkMenuElem()).toBe(false);
             clickMenu()
-            expect(clickedMenu()).not.toBe(0);
+            expect(checkMenuElem()).not.toBe(false);
         });
     });
     

@@ -125,10 +125,6 @@ function clickMenu(){
     document.querySelector('.menu-icon-link').click();
 }
 
-function clickedMenu() {
-    var teste = document.getElementsByClassName('menu-hidden').length;
-    return teste;
-}
 
 function checkMenuElem() {
     var teste = $('body').hasClass('menu-hidden');
